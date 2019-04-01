@@ -42,7 +42,7 @@ Abstract
 [%notitle]
 == In the beginning...
 
-image::the_beginning.jpg[The Beginning,background,scale="cover"]
+image::the_beginning.jpg[background,size=cover]
 
 [.notes]
 --
@@ -84,6 +84,82 @@ addresses).
 * Not much thought of security or privacy.
 --
 
+== DNS
+
+* A consistent namespace used for referring to resources.
+* Maintained in a distributed manner.
+* Local caching to improve performance.
+
+[.notes]
+--
+I'm taking a quick tour through the basics
+of how DNS works, largely so we can get the terminology.
+
+I'm only looking at items of interest to application devs.
+There's a chunk of stuff on server management which I'm
+not going to discuss.
+--
+
+== The domain namespace
+image::domain-hierarchy.png[Domain Hierarchy]
+
+[.notes]
+--
+Let's look at the namespace first.
+
+The containers outline the division of responsibility for
+parts of the namespace. Note that a single zone can have multiple
+levels. In the UK, .co.uk and .org.uk are all in one zone.
+
+The top of the tree is the root zone. This has a null name.
+Note FQDN ending in '.'.
+--
+
+== Delegation of authority
+image::delegation-of-authority.png[Delegation of authority]
+
+[.notes]
+--
+Another view showing delegation of authority. Note the
+cross-cutting link to/from verisign.ca.
+--
+
+== Root servers
+
+* A fixed list of IPv4 and IPv6 addresses for 13 servers.
+** `a.root-servers.net` .. `m.root-servers.net`
+
+[.notes]
+--
+Fixed set of 13 root server addresses. Why 13?
+--
+
+== Root servers operators
+
+* VeriSign, Inc., University of Southern California, Cogent Communications,
+  University of Maryland, NASA Ames Research Centre, Internet Systems Consortium, Inc.,
+  US Department of Defence, US Army Research Lab, Netnod (Sweden),
+  RIPE, ICANN, WIDE Project (Japan)
+
+https://www.iana.org/domains/root/servers[IANA has the details]
+
+[.notes]
+--
+J root was originally Network Solutions, now taken over by VeriSign.
+--
+
+== Recursive servers
+
+* Search the hierarchy to resolve queries
+* Cache results and reuse them in future queries
+* Typically run by ISP...
+* ... or 3rd party, e.g. Google, OpenDNS
+
+== Stub resolver
+
+* Your local name resolution
+* Typically using recursive server(s) supplied by DHCP
+
 [%notitle]
 == The Snowden revelations
 
@@ -91,7 +167,7 @@ image::snowden.jpg[Snowden]
 
 [.notes]
 --
-* Edward Snowden revealed that interception was far more widespread than believed.
+* In 2013, Edward Snowden revealed that interception was far more widespread than believed.
 --
 
 
