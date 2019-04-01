@@ -3,16 +3,17 @@
 :revealjs_theme: night
 :imagesdir: images
 
+image::bones.jpg[Bones,200]
+
+== ... But Not As We Know It
+
 Jim Hague +
 mailto:jim.hague@acm.org[jim.hague@acm.org] +
 https://twitter.com/banbury_bill[@banbury_bill] +
 http://www.sinodun.com[Sinodun Internet Technologies]
 
-== ... But Not As We Know It
-
-image::bones.jpg[Bones,300]
-
-== !
+[%notitle]
+== DoH RFC
 
 [small]
 ----
@@ -31,3 +32,90 @@ Abstract
    DNS responses over HTTPS.  Each DNS query-response pair is mapped
    into an HTTP exchange.
 ----
+
+[.notes]
+--
+* What I'm going to be talking about.
+* But first, we need some background.
+--
+
+[%notitle]
+== In the beginning...
+
+image::the_beginning.jpg[The Beginning,background,scale="cover"]
+
+[.notes]
+--
+* In the beginning, there was the Word, and the Word was RFC1034.
+* Thus spake Mockapetris.
+--
+
+[%notitle]
+== ... was the word.
+
+[small]
+----
+Network Working Group                                     P. Mockapetris
+Request for Comments: 1034                                           ISI
+Obsoletes: RFCs 882, 883, 973                              November 1987
+
+
+                 DOMAIN NAMES - CONCEPTS AND FACILITIES
+
+
+
+1. STATUS OF THIS MEMO
+
+This RFC is an introduction to the Domain Name System (DNS), and omits
+many details which can be found in a companion RFC, "Domain Names -
+Implementation and Specification" [RFC-1035].  That RFC assumes that the
+reader is familiar with the concepts discussed in this memo.
+
+A subset of DNS functions and data types constitute an official
+protocol.  The official protocol includes standard queries and their
+responses and most of the Internet class data formats (e.g., host
+addresses).
+----
+
+[.notes]
+--
+* The DNS Ur-document.
+* Describes a protocol operating over UDP and TCP.
+* Not much thought of security or privacy.
+--
+
+[%notitle]
+== The Snowden revelations
+
+image::snowden.jpg[Snowden]
+
+[.notes]
+--
+* Edward Snowden revealed that interception was far more widespread than believed.
+--
+
+
+[%notitle]
+== The IETF response
+
+[small]
+----
+Internet Engineering Task Force (IETF)                        S. Farrell
+Request for Comments: 7258                        Trinity College Dublin
+BCP: 188                                                   H. Tschofenig
+Category: Best Current Practice                                 ARM Ltd.
+ISSN: 2070-1721                                                 May 2014
+
+
+                   Pervasive Monitoring Is an Attack
+
+Abstract
+
+   Pervasive monitoring is a technical attack that should be mitigated
+   in the design of IETF protocols, where possible.
+----
+
+[.notes]
+--
+* The IETF's response.
+--
