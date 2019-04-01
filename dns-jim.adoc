@@ -1,0 +1,33 @@
+= It's DNS, Jim...
+:backend: revealjs
+:revealjs_theme: night
+:imagesdir: images
+
+Jim Hague +
+mailto:jim.hague@acm.org[jim.hague@acm.org] +
+https://twitter.com/banbury_bill[@banbury_bill] +
+http://www.sinodun.com[Sinodun Internet Technologies]
+
+== ... But Not As We Know It
+
+image::bones.jpg[Bones,300]
+
+== !
+
+[small]
+----
+Internet Engineering Task Force (IETF)                        P. Hoffman
+Request for Comments: 8484                                         ICANN
+Category: Standards Track                                     P. McManus
+ISSN: 2070-1721                                                  Mozilla
+                                                            October 2018
+
+
+                      DNS Queries over HTTPS (DoH)
+
+Abstract
+
+   This document defines a protocol for sending DNS queries and getting
+   DNS responses over HTTPS.  Each DNS query-response pair is mapped
+   into an HTTP exchange.
+----
