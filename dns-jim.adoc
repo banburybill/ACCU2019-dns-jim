@@ -3,6 +3,7 @@
 :revealjs_theme: black
 :imagesdir: images
 :figure-caption!:
+:customcss: minspace.css
 
 image::bones.jpg[Bones,350]
 
@@ -207,6 +208,7 @@ NAME is a series of labels ending label length 0.
 [%notitle]
 == Common RR types
 
+[.minspace,cols="20,80"]
 |===
 | A | IPv4 address +
 | AAAA | IPv6 address +
@@ -290,6 +292,7 @@ Obsoleted by RFC6891 (2013), which discarded a funky label format.
 [%notitle]
 == EDNS0 OPT RR
 
+[.minspace,cols="15,25,60"]
 |===
 | NAME | | Always 00
 | TYPE | 16 bits | OPT (41)
