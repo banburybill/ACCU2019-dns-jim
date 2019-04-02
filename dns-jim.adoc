@@ -1,9 +1,10 @@
 = It's DNS, Jim...
 :backend: revealjs
-:revealjs_theme: night
+:revealjs_theme: black
 :imagesdir: images
+:figure-caption!:
 
-image::bones.jpg[Bones,200]
+image::bones.jpg[Bones,350]
 
 == ... But Not As We Know It
 
@@ -15,8 +16,7 @@ http://www.sinodun.com[Sinodun Internet Technologies]
 [%notitle]
 == DoH RFC
 
-[small]
-----
+....
 Internet Engineering Task Force (IETF)                        P. Hoffman
 Request for Comments: 8484                                         ICANN
 Category: Standards Track                                     P. McManus
@@ -31,7 +31,7 @@ Abstract
    This document defines a protocol for sending DNS queries and getting
    DNS responses over HTTPS.  Each DNS query-response pair is mapped
    into an HTTP exchange.
-----
+....
 
 [.notes]
 --
@@ -53,8 +53,7 @@ image::the_beginning.jpg[background,size=cover]
 [%notitle]
 == ... was the word.
 
-[small]
-----
+....
 Network Working Group                                     P. Mockapetris
 Request for Comments: 1034                                           ISI
 Obsoletes: RFCs 882, 883, 973                              November 1987
@@ -75,7 +74,7 @@ A subset of DNS functions and data types constitute an official
 protocol.  The official protocol includes standard queries and their
 responses and most of the Internet class data formats (e.g., host
 addresses).
-----
+....
 
 [.notes]
 --
@@ -174,8 +173,7 @@ image::snowden.jpg[Snowden]
 [%notitle]
 == The IETF response
 
-[small]
-----
+....
 Internet Engineering Task Force (IETF)                        S. Farrell
 Request for Comments: 7258                        Trinity College Dublin
 BCP: 188                                                   H. Tschofenig
@@ -189,7 +187,7 @@ Abstract
 
    Pervasive monitoring is a technical attack that should be mitigated
    in the design of IETF protocols, where possible.
-----
+....
 
 [.notes]
 --
