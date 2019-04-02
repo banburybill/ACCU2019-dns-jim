@@ -13,9 +13,10 @@ image::bones.jpg[Bones,350]
 == ... But Not As We Know It
 
 Jim Hague +
+http://www.sinodun.com[Sinodun Internet Technologies] +
 mailto:jim.hague@acm.org[jim.hague@acm.org] +
 https://twitter.com/banbury_bill[@banbury_bill] +
-http://www.sinodun.com[Sinodun Internet Technologies]
+https://github.com/banburybill
 
 [%notitle]
 == Session summary
