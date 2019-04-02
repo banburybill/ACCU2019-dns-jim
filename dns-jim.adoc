@@ -14,6 +14,11 @@ https://twitter.com/banbury_bill[@banbury_bill] +
 http://www.sinodun.com[Sinodun Internet Technologies]
 
 [%notitle]
+== Session summary
+
+image::homer-doh.jpg[background,size=cover]
+
+[%notitle]
 == DoH RFC
 
 ....
