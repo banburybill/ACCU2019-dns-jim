@@ -1,6 +1,9 @@
 = It's DNS, Jim...
 :backend: revealjs
 :revealjs_theme: black
+:revealjs_controls: false
+:revealjs_slideNumber: true
+:revealjs_showSlideNumber: speaker
 :imagesdir: images
 :figure-caption!:
 :customcss: minspace.css
