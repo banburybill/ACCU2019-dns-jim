@@ -444,27 +444,97 @@ image::snowden.jpg[Snowden]
 * In 2013, Edward Snowden revealed that interception was far more widespread than believed.
 --
 
+== IETF response - timeline
 
-[%notitle]
-== The IETF response
+* 2013:
+** Snowden
+* 2014:
+** RFC7285 Pervasive Monitoring is an Attack
+** DPRIVE Working Group formed - goals:
+*** Encrypt Stub-Resolver DNS
+*** Think about encrypting Resolver-Authoritative
 
-....
-Internet Engineering Task Force (IETF)                        S. Farrell
-Request for Comments: 7258                        Trinity College Dublin
-BCP: 188                                                   H. Tschofenig
-Category: Best Current Practice                                 ARM Ltd.
-ISSN: 2070-1721                                                 May 2014
+== DPRIVE
 
-
-                   Pervasive Monitoring Is an Attack
-
-Abstract
-
-   Pervasive monitoring is a technical attack that should be mitigated
-   in the design of IETF protocols, where possible.
-....
+* 2015:
+** RFC7626 DNS Privacy Considerations
+* 2016:
+** RFC7766 DNS over TCP
+** RFC7858 DNS over TLS
 
 [.notes]
 --
-* The IETF's response.
+RFC7626 is a good read for those interested.
+
+"Alcoholics Anonymouse website is public. The fact you are
+reading it is not."
+
+Sara and Stephane may have a bis in the works.
+--
+
+[%notitle]
+== DNS over TLS (DoT)
+
+....
+Internet Engineering Task Force (IETF)                             Z. Hu
+Request for Comments: 7858                                        L. Zhu
+Category: Standards Track                                   J. Heidemann
+ISSN: 2070-1721                                                  USC/ISI
+                                                               A. Mankin
+                                                             Independent
+                                                              D. Wessels
+                                                           Verisign Labs
+                                                              P. Hoffman
+                                                                   ICANN
+                                                                May 2016
+
+
+       Specification for DNS over Transport Layer Security (TLS)
+
+Abstract
+
+   This document describes the use of Transport Layer Security (TLS) to
+   provide privacy for DNS.  Encryption provided by TLS eliminates
+   opportunities for eavesdropping and on-path tampering with DNS
+   queries in the network, such as discussed in RFC 7626.  In addition,
+   this document specifies two usage profiles for DNS over TLS and
+   provides advice on performance considerations to minimize overhead
+   from using TCP and TLS with DNS.
+....
+
+== DNS over TLS (DoT)
+
+DNS over TCP, but using TLS and to port 853
+
+[%notitle]
+== DoT modes
+
+* Opportunistic mode
+** Try 853, fall back to normal DNS on port 53 (Do53?) otherwise
+** Defeats passive surveillance
+* Strict mode
+** Configure server name and verify
+** Prevents redirects, increases trust in service
+* Transport data integrity - can't inject spoofed responses
+
+[.notes]
+--
+TCP or TLS prevent amplification attacks.
+
+Note TLS SNI still leaks.
+--
+
+== DoT support
+
+* Clients: Android Pie, systemd, Stubby
+** Native Windows/macOS/iOS support still needed
+* Servers: Unbound, Knot resolver, dnsdist, Bind via proxy
+* November 2017: Quad9 public DNS (9.9.9.9)
+* March 2018: Cloudflare public DNS (1.1.1.1)
+* January 2019: Google public DNS (8.8.8.8)
+
+[.notes]
+--
+It's easy to run a DoT server. Use one the supported servers, or put a TCP/TLS proxy
+in front of any other server.
 --
