@@ -538,3 +538,28 @@ Note TLS SNI still leaks.
 It's easy to run a DoT server. Use one the supported servers, or put a TCP/TLS proxy
 in front of any other server.
 --
+
+[%notitle]
+== DNS complexity
+
+image::dns-rfc-graph.jpg[]
+
+[.notes]
+--
+Currently 122 RFCs relevant to DNS, 2170 pages.
+
+Mistakes get made. DNAME and DNSSEC.
+--
+
+[%notitle]
+== Meet the DNS camel
+
+image::dns-camel.jpg[]
+
+https://powerdns.org/dns-camel/
+
+
+[.notes]
+--
+Baby of Bert Hubert, founder of PowerDNS.
+--
