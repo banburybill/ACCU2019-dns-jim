@@ -347,12 +347,92 @@ Category: Standards Track                                      D. Massey
 ....
 
 [.notes]
-----
+--
 DNSSEC first started in 1995. And it took a LONG time to get
 pretty right. The current base RFCs published 2005.
 
 And the root zone didn't get signed until 2010.
-----
+--
+
+== DNSSEC
+
+* Assures authenticity of DNS data
+* Assures integrity of DNS data
+** Note it authenticates DNS data, NOT DNS servers
+* Does NOT ensure confidentiality
+
+[.notes]
+--
+Compare TLS, which authenticates servers not data.
+--
+
+[%notitle]
+== DNSSEC from root
+
+image:dnsviz1.png[] image:dnsviz2.png[]
+
+[.notes]
+--
+Note key lengths.
+--
+
+[%notitle]
+== DNSSEC from root
+
+image::dnsviz3.png[]
+
+== New DNSSEC RRs
+
+* DNSKEY: A public key
+* RRSIG: Signature of RR sets
+* NSEC/NSEC3: Name existance
+* DS: Digest of DNSKEY record on parent side of delegation
+
+== DNSSEC - back to the wire
+
+* EDNS0 flag DO: Client groks DNSSEC.
+* New main flags:
+** Authenticated Data (AD): Data is authenticated
+** Checking Disabled (CD): Client is OK to receive non-authenticated data
+
+== Using DNSSEC
+
+* If your resolver does DNSSEC:
+** AD indicates data is authenticated
+** SERVFAIL if authentication fails
+
+== Last mile problem
+
+[%step]
+* Can your stub resolver validate?
+* Can your resolving server validate?
+* ... and even if it can, can you trust the link between you and the resolving server?
+
+== Local validation
+
+* DNSSEC-trigger: https://www.nlnetlabs.nl/projects/dnssec-trigger/
+* Stubby: https://getdnsapi.net/blog/dns-privacy-daemon-stubby/
+
+== DNSSEC as Public Key infrastructure
+
+[.notes]
+--
+Putting public keys into DNSSEC gets you a structured,
+hierarchical Public Key Infrastructure.
+
+Contrast X.509 structure which is entirely flat.
+--
+
+[%notitle]
+== DANE and friends
+
+* IPSec keys (RFC4025)
+* SSH host keys (RFC4255)
+* Storing Certificates, CERT RR (RFC4398)
+* DKIM keys (RFC4871)
+* CA Authorisation (RFC6844)
+* DNS Authentication of Named Entities (DANE), X.509 for TLS (RFC6698,7671)
+* OpenPGP key (RFC7929)
 
 [%notitle]
 == The Snowden revelations
