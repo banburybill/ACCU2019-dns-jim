@@ -603,7 +603,7 @@ This is lightning fast.
 * Client configured via URI template (RFC6570)
 ** `https://dnsserver.example.net/dns-query{?dns}`
 
-== DoH: HTTP GET
+== DoH: HTTP GET Query
 
 ....
 :method = GET
@@ -612,8 +612,9 @@ This is lightning fast.
 :path = /dns-query?dns=AAABAAABAAAAAAAAA3d3dwdleGFtcGxlA2NvbQAAAQAB
 accept = application/dns-message
 ....
+* Query data is encoded in `base64url`.
 
-== DoH: HTTP POST
+== DoH: HTTP POST Query
 
 ....
 :method = POST
@@ -629,3 +630,23 @@ content-length = 33
 07 65 78 61 6d 70 6c 65  03 63 6f 6d 00 00 01 00
 01
 ....
+
+== DoH: HTTP response
+
+....
+:status = 200
+content-type = application/dns-message
+content-length = 61
+cache-control = max-age=3709
+
+<61 bytes represented by the following hex encoding>
+00 00 81 80 00 01 00 01  00 00 00 00 03 77 77 77
+07 65 78 61 6d 70 6c 65  03 63 6f 6d 00 00 1c 00
+01 c0 0c 00 1c 00 01 00  00 0e 7d 00 10 20 01 0d
+b8 ab cd 00 12 00 01 00  02 00 03 00 04
+....
+
+* Query: `IN` `AAAA` records for `www.example.com`
+* Response: 1  answer record
+** Address of `2001:db8:abcd:12:1:2:3:4`
+** `TTL` of 3709s (0xe7d)
