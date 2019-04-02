@@ -560,10 +560,72 @@ Mistakes get made. DNAME and DNSSEC.
 
 image::dns-camel.jpg[]
 
-https://powerdns.org/dns-camel/
-
-
 [.notes]
 --
 Baby of Bert Hubert, founder of PowerDNS.
 --
+
+== Tackling the camel
+
+https://powerdns.org/hello-dns/
+https://powerdns.org/dns-camel/
+
+[%notitle]
+== Back to DoH
+
+image::homer-doh.jpg[background,size=cover]
+
+== DoH timeline
+
+* March 2017: DIscussed at IETF 98
+* May 2017: First draft published
+* September 2017: DoH Working Group formed - goals:
+** Standardise encodings for DNS queries and responses that are suitable for use in HTTPS
+
+== DoH timeline
+
+* October 2017: DoH draft adopted by WG
+* July 2017: Submitted to IESG
+* August 2018: Approved
+* October 2018: RFC8484 published
+
+[.notes]
+--
+This is lightning fast.
+--
+
+== DNS over HTTPS
+
+* Defined `application/dns-message` media type
+** Same as the payload of a DNS UDP packet
+* Each DNS query/response is a HTTP exchange
+** SHOULD use 0 in DNS ID
+* Client configured via URI template (RFC6570)
+** `https://dnsserver.example.net/dns-query{?dns}`
+
+== DoH: HTTP GET
+
+....
+:method = GET
+:scheme = https
+:authority = dnsserver.example.net
+:path = /dns-query?dns=AAABAAABAAAAAAAAA3d3dwdleGFtcGxlA2NvbQAAAQAB
+accept = application/dns-message
+....
+
+== DoH: HTTP POST
+
+....
+:method = POST
+:scheme = https
+:authority = dnsserver.example.net
+:path = /dns-query
+accept = application/dns-message
+content-type = application/dns-message
+content-length = 33
+
+<33 bytes represented by the following hex encoding>
+00 00 01 00 00 01 00 00  00 00 00 00 03 77 77 77
+07 65 78 61 6d 70 6c 65  03 63 6f 6d 00 00 01 00
+01
+....
