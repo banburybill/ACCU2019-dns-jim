@@ -159,6 +159,193 @@ J root was originally Network Solutions, now taken over by VeriSign.
 * Your local name resolution
 * Typically using recursive server(s) supplied by DHCP
 
+== A look at the wire
+
+[%notitle]
+== Format of a DNS message
+
+.Format of a DNS message
+image::dns-message.jpg[A DNS message]
+
+[.notes]
+--
+The overall format of a DNS message.
+
+OpCodes. 0=Query, 2=Status
+
+Two others for dynamic updates and zone updates.
+--
+
+[%notitle]
+== Format of a Question section
+
+.Format of a Question section
+image::question-format.jpg[Question section format]
+
+[.notes]
+--
+The QNAME is a series of labels ending label length 0.
+Label compression.
+--
+
+[%notitle]
+== Format of a RR section
+
+.Format of a RR section
+image::rr-format.jpg[RR section format]
+
+[.notes]
+--
+NAME is a series of labels ending label length 0.
+--
+
+[%notitle]
+== Common RR types
+
+|===
+| A | IPv4 address +
+| AAAA | IPv6 address +
+| MX | SMTP servers for domain
+| NS | Name servers for domain
+| PTR | Pointer to canonical name (for address)
+| SRV | Location of servers providing given service
+| TXT | General textual information
+| SOA | Start of Authority record for zone
+|===
+
+[.notes]
+--
+Basic set of RR types. There are lots more, many/most are historical relics.
+--
+
+== Transmission
+
+[%step]
+* DNS uses UDP
+* Except when it uses TCP
+
+[.notes]
+--
+By default DNS uses UDP. However, in IPv4 the minimum MTU
+is 576 bytes. Generally 512 bytes is considered maximum for
+unfragmentable UDP payload.
+
+So RFC1035 limits DNS replies to 512 bytes. If you go over that,
+you may drop back to TCP. In TCP, you send a 2 byte header giving
+the length of the DNS message.
+
+Some queries (e.g. NS for .) generate a list of servers; 13
+with A records fits into single UDP with some spare
+space. There are also 13 gtld servers for .com/.net.
+
+TCP support was only made mandatory in 2011. However, UDP
+usage is preferred as much as possible, avoid connection
+setup/teardown overhead on servers.
+
+IPv6 has much larger minimum MTU, 1280. So expect more
+root servers in the future.
+--
+
+[%notitle]
+== EDNS0
+
+....
+Network Working Group                                            P. Vixie
+Request for Comments: 2671                                            ISC
+Category: Standards Track                                     August 1999
+
+
+                  Extension Mechanisms for DNS (EDNS0)
+
+...
+
+Abstract
+
+   The Domain Name System's wire protocol includes a number of fixed
+   fields whose range has been or soon will be exhausted and does not
+   allow clients to advertise their capabilities to servers.  This
+   document describes backward compatible mechanisms for allowing the
+   protocol to grow.
+....
+
+[.notes]
+--
+Obsoleted by RFC6891 (2013), which discarded a funky label format.
+--
+
+== EDNS0
+
+* Extends RCODE range and number of flags.
+* Mechanism to allow larger UDP messages. This is necessary because of an
+  increase in DNS RR sizes:
+** AAAA records
+** Large TXT records
+** DNSSEC
+
+[%notitle]
+== EDNS0 OPT RR
+
+|===
+| NAME | | Always 00
+| TYPE | 16 bits | OPT (41)
+| CLASS | 16 bits | Sender UDP payload size
+| TTL | 32 bits | uint8 extended RCODE
+| | | uint8 version (0)
+| | | uint16 flags
+| RDLEN | 16 bits | Length of RDATA
+| RDATA | | Options. Any number of:
+| | | uint16 Option Code
+| | | uint16 Option length
+| | | Option data
+|===
+
+[.notes]
+--
+Extended RCODE is upper 8 bits of extended 12-bit RCODE.
+
+There are currently no officially defined option codes.
+
+The major point of interest is the ability of a sender to indicate the
+largest UDP payload size it thinks it will accept.  This allows other
+side to try that size and hopefully avoid fallback to TCP.
+--
+
+[%notitle]
+== DNSSEC
+
+....
+Network Working Group                                          R. Arends
+Request for Comments: 4033                          Telematica Instituut
+Obsoletes: 2535, 3008, 3090, 3445, 3655, 3658,                R. Austein
+           3755, 3757, 3845                                          ISC
+Updates: 1034, 1035, 2136, 2181, 2308, 3225,                   M. Larson
+         3007, 3597, 3226                                       VeriSign
+Category: Standards Track                                      D. Massey
+                                               Colorado State University
+                                                                 S. Rose
+                                                                    NIST
+                                                              March 2005
+
+
+               DNS Security Introduction and Requirements
+
+[omitted]
+
+   The Domain Name System Security Extensions (DNSSEC) add data origin
+   authentication and data integrity to the Domain Name System.  This
+   document introduces these extensions and describes their capabilities
+   and limitations.  This document also discusses the services that the
+   DNS security extensions do and do not provide.
+....
+
+[.notes]
+----
+DNSSEC first started in 1995. And it took a LONG time to get
+pretty right. The current base RFCs published 2005.
+
+And the root zone didn't get signed until 2010.
+----
+
 [%notitle]
 == The Snowden revelations
 
