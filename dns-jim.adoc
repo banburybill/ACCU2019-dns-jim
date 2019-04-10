@@ -513,11 +513,12 @@ DNS over TCP, but using TLS and to port 853
 [%notitle]
 == DoT modes
 
-* Opportunistic mode
+[%step]
+* *Opportunistic* mode
 ** Try 853, fall back to normal DNS on port 53 (Do53?) otherwise
 ** Defeats passive surveillance
-* Strict mode
-** Configure server name and verify
+* *Strict* mode
+** Configure server SPKI fingerprint(s) and verify
 ** Prevents redirects, increases trust in service
 * Transport data integrity - can't inject spoofed responses
 
@@ -577,7 +578,7 @@ image::homer-doh.jpg[background,size=cover]
 
 == DoH timeline
 
-* March 2017: DIscussed at IETF 98
+* March 2017: Discussed at IETF 98
 * May 2017: First draft published
 * September 2017: DoH Working Group formed - goals:
 ** Standardise encodings for DNS queries and responses that are suitable for use in HTTPS
@@ -596,12 +597,32 @@ This is lightning fast.
 
 == DNS over HTTPS
 
-* Defined `application/dns-message` media type
-** Same as the payload of a DNS UDP packet
 * Each DNS query/response is a HTTP exchange
+* Must use `https` URI scheme
+** HTTP/2 is minimum recommended HTTP version
 ** SHOULD use 0 in DNS ID
 * Client configured via URI template (RFC6570)
 ** `https://dnsserver.example.net/dns-query{?dns}`
+
+== DNS over HTTPS
+
+* Defined `application/dns-message` media type
+** Same as the payload of a DNS UDP packet
+** Maximum size 65535
+** Door open to future definitions of alternate media types: DNS/JSON perhaps?
+* HTTP cache control and DNS TTL need to be coordinated
+
+[.notes]
+--
+`dns-message` media type is only one defined, but others in future not ruled
+out. Suspect JSON media type will come along. Remember DNS TCP messages have
+extra 2 bytes length header.
+
+Mention here that DNS TTL and HTTP cache control have to be coordinated. HTTP cache
+control MUST be <= shortest TTL in the message. = is RECOMMENDED.
+Similarly, clients must take into account Age: headers and adjust received TTLs
+accordingly.
+--
 
 == DoH: HTTP GET Query
 
@@ -650,3 +671,111 @@ b8 ab cd 00 12 00 01 00  02 00 03 00 04
 * Response: 1  answer record
 ** Address of `2001:db8:abcd:12:1:2:3:4`
 ** `TTL` of 3709s (0xe7d)
+
+== DoH: Comparison with DoT
+
+[%step]
+* One use case: "Allow web applications to to access DNS information via existing browser APIs"
+* Discovery: MUST use URI template
+** So no *Opportunistic*
+* _Increased_ tracking potential via HTTP headers (`User-Agent`, language, etc.)?
+* New privacy concerns
+
+== DoH: Connection models
+
+[%step]
+* _Dedicated_: DoH traffic only
+* _Mixed_: DoH traffic mixed with other HTTPS traffic
+[%step]
+** Better privacy?
+** Impossible to block just DNS traffic
+
+== DoH: Server deployment status
+
+[%step]
+* Large scale:
+** Cloudflare https://cloudflare-dns.com/dns-query
+** Google https://dns.google.com/experimental
+** Quad9 https://dns*.quad9.net/dns-query (3 flavours of service)
+* https://github.com/curl/curl/wiki/DNS-over-HTTPS[~12 other test servers]
+
+== DoH: Client status
+
+* Firefox
+* Chrome (Chromium, Bromite)
+* curl
+* _Intra_ Android app
+* https://github.com/cloudflare/cloudflared[`cloudflared`]
+* Various experimental
+
+== DoH: Server implementations
+
+* `dnsdist` load balancer
+* Knot resolver (branch)
+
+== DoH in browsers
+
+* OSs are slow to offer new DNS features
+* "`We care about the privacy of our users`"
+* "`Reduced latency within the browser`"
+
+== Why DoH not DoT - Mozilla
+
+[%step]
+* Integration: "leverage the HTTP ecosystem"
+* HTTPS everywhere: "`it works ... juts use port 443, mix traffic`"
+* Cool stuff:
+** JSON
+** Server push
+** Get DNS from location other than configured resolver
+
+== '`MoziFlare`'
+
+[%step]
+* "`We'd like to turn this on for all our users`"
+* "`Cloudflare is our Trusted Recursive Resolver (TRR)`"
+* "`.., we have a resolver we can trust to protect our users' privacy. This means
+  *Firefox can ignore the resolver that the network provides* and just go
+  straight to CloudFlare`"
+
+[.notes]
+--
+Discuss Firefox Nightly experiment and results.
+
+6ms performance penalty considered acceptable.
+--
+
+== '`MoziFlare`' cont.
+
+[%step]
+* "`We won't check for DoH or DoT on the local resolver.`"
+* "`... the problem we are attempting to solve here is attack on the user’s
+   name resolution from an attacker with full or partial control of the
+   network`"
+* "`The user will be informed that we have enabled use of a TRR and
+    have the opportunity to turn it off at that time, but will not be
+    required to opt-in to get DoH with a TRR.`"
+
+[.notes]
+--
+ekr, 27/03/19.
+--
+
+[%notitle]
+== The User layer
+
+image::OSI_user_layers.png[width=1024]
+
+Image by Gvseostud - Own work, https://commons.wikimedia.org/w/index.php?curid=29156115[CC BY-SA 3.0]
+
+[.notes]
+--
+For those that prefer the 4 layer TCP/IP model, RFC 2321 (1998) defined the political 5th layer
+and religious 6th layer.
+--
+
+
+== Will this be the 5 minute argument?
+
+
+== ... or the full half hour?
