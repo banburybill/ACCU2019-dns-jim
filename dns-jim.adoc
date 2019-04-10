@@ -707,6 +707,7 @@ b8 ab cd 00 12 00 01 00  02 00 03 00 04
 * _Intra_ Android app
 * https://github.com/cloudflare/cloudflared[`cloudflared`]
 * Various experimental
+* http://getdnsapi.net[GetDNS/Stubby] in progress
 
 == DoH: Server implementations
 
@@ -728,6 +729,14 @@ b8 ab cd 00 12 00 01 00  02 00 03 00 04
 ** JSON
 ** Server push
 ** Get DNS from location other than configured resolver
+
+[.notes]
+--
+Is this the start of DNS 2.0? A few large resolvers dominate the world.
+Compare email; who isn't using Gmail/Yahoo/Outlook?
+
+Is the internet moving inexorably to control by a few large organisations?
+--
 
 == '`MoziFlare`'
 
@@ -759,7 +768,15 @@ Discuss Firefox Nightly experiment and results.
 [.notes]
 --
 ekr, 27/03/19.
+
+Still much confusion. How will regions be implemented? When will you change from one
+to the other?
 --
+
+[%notitle]
+== The OSI layers
+
+image::OSI_seven_layers.jpg[width=1024]
 
 [%notitle]
 == The User layer
@@ -774,8 +791,72 @@ For those that prefer the 4 layer TCP/IP model, RFC 2321 (1998) defined the poli
 and religious 6th layer.
 --
 
-
 == Will this be the 5 minute argument?
 
+image::5minuteargument.jpg[width=512]
 
+== Individual layer
+
+[%step]
+* Split between system and browser resolving
+* Configure DNS  for each application?
+* Breaks parental control service
+* Informed consent
+* What is best choice for user?
+
+[.notes]
+--
+If user has VPN that sets resolver, resolving in browser breaks when VPN is up.
+--
+
+[%notitle]
+== Mum and Dad (pt 1)
+
+====
+Contract with TalkTalk is based in the same legal juristiction, and
+TalkTalk are subject to GDPR.  Regulatory environment for handling of
+privacy data is understood.  Privacy policy appears satisfactory, but
+Cloudflare is a US corporation, so subject to different regulatory
+regime, with laxer requirements.
+====
+
+[%notitle]
+== Mum and Dad (pt 2)
+
+====
+https://www.wired.co.uk/article/talktalk-hack-customers-lost[TalkTalk 2015 data breach]
+is evidence that TalkTalk isn't a safe host for privacy-related data. Cloudflare's record is
+not spotless, but on balance they are more trustworthy than TalkTalk.
+====
 == ... or the full half hour?
+
+== Organisation layer
+
+[%step]
+* Split-horizon DNS
+* Organisation does not regard its own network as belonging to attacker
+* "`My network, my rules`"
+[%step]
+** Though if org is an ISP, do customers have a choice of ISP?
+
+== Government layer
+
+[%step]
+* Filtering banned content using DNS
+* Malware detection and mitigation
+* There are valid reasons organisations need some visibility on their DNS lookups
+
+== Religious layer
+
+[%step]
+* Will DNS resolving go the way of email?
+* Are we heading for an internet where *everything* runs on HTTPS to port 443?
+
+== DNS privacy now
+
+* DoT via system
+* Opportunistic or Strict to organisation's resolver
+
+== Fin
+
+https://dnsprivacy.org/
