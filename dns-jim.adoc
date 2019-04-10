@@ -323,6 +323,44 @@ side to try that size and hopefully avoid fallback to TCP.
 --
 
 [%notitle]
+== EDNS0 ECS client subnet
+
+....
+Internet Engineering Task Force (IETF)                     C. Contavalli
+Request for Comments: 7871                              W. van der Gaast
+Category: Informational                                           Google
+ISSN: 2070-1721                                              D. Lawrence
+                                                     Akamai Technologies
+                                                               W. Kumari
+                                                                  Google
+                                                                May 2016
+
+
+                      Client Subnet in DNS Queries
+
+Abstract
+
+   This document describes an Extension Mechanisms for DNS (EDNS0)
+   option that is in active use to carry information about the network
+   that originated a DNS query and the network for which the subsequent
+   response can be cached.  Since it has some known operational and
+   privacy shortcomings, a revision will be worked through the IETF for
+   improvement.
+....
+
+== EDNS0 ECS client subnet
+
+[%steps]
+* An unusual RFC
+* Encodes client subnet into the query
+** So CDN knows geographic location of client
+
+[.notes]
+--
+Unusual in that RFCs don't usually tell you NOT to use the facility described in the RFC.
+--
+
+[%notitle]
 == DNSSEC
 
 ....
