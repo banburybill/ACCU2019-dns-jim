@@ -583,6 +583,36 @@ in front of any other server.
 --
 
 [%notitle]
+== QNAME minimisation
+
+....
+Internet Engineering Task Force (IETF)                     S. Bortzmeyer
+Request for Comments: 7816                                         AFNIC
+Category: Experimental                                        March 2016
+ISSN: 2070-1721
+
+
+             DNS Query Name Minimisation to Improve Privacy
+
+Abstract
+
+   This document describes a technique to improve DNS privacy, a
+   technique called "QNAME minimisation", where the DNS resolver no
+   longer sends the full original QNAME to the upstream name server.
+....
+
+== QNAME minimisation
+
+[%steps]
+* DNSOP WG not DPRIVE
+* When recursive resolver sends query to authorative, it sends the full query
+* Using QNAME minimisation, the name is stripped up to one label before that which the server is authorative for:
+* So, looking up `www.example.com`
+** Root server sees request for `com`
+** `com` server sees request for `example.com`
+** Only `example.com` server sees full query
+
+[%notitle]
 == DNS complexity
 
 image::dns-rfc-graph.jpg[]
