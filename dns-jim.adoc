@@ -757,6 +757,7 @@ b8 ab cd 00 12 00 01 00  02 00 03 00 04
 [%step]
 ** Better privacy?
 ** Impossible to block just DNS traffic
+** *THE* big differentiator with DoT
 
 == DoH: Server deployment status
 
@@ -792,7 +793,7 @@ b8 ab cd 00 12 00 01 00  02 00 03 00 04
 
 [%step]
 * Integration: "leverage the HTTP ecosystem"
-* HTTPS everywhere: "`it works ... juts use port 443, mix traffic`"
+* HTTPS everywhere: "`it works ... just use port 443, mix traffic`"
 * Cool stuff:
 ** JSON
 ** Server push
@@ -800,10 +801,7 @@ b8 ab cd 00 12 00 01 00  02 00 03 00 04
 
 [.notes]
 --
-Is this the start of DNS 2.0? A few large resolvers dominate the world.
-Compare email; who isn't using Gmail/Yahoo/Outlook?
-
-Is the internet moving inexorably to control by a few large organisations?
+Is this the start of DNS 2.0?
 --
 
 == '`MoziFlare`'
@@ -880,28 +878,31 @@ If user has VPN that sets resolver, resolving in browser breaks when VPN is up.
 [%notitle]
 == Mum and Dad (pt 1)
 
-====
+____
 Contract with TalkTalk is based in the same legal juristiction, and
 TalkTalk are subject to GDPR.  Regulatory environment for handling of
-privacy data is understood.  Privacy policy appears satisfactory, but
+privacy data is understood.  Cloudflare's privacy policy appears satisfactory, but
 Cloudflare is a US corporation, so subject to different regulatory
 regime, with laxer requirements.
-====
+____
 
 [%notitle]
 == Mum and Dad (pt 2)
 
-====
-https://www.wired.co.uk/article/talktalk-hack-customers-lost[TalkTalk 2015 data breach]
-is evidence that TalkTalk isn't a safe host for privacy-related data. Cloudflare's record is
-not spotless, but on balance they are more trustworthy than TalkTalk.
-====
+____
+https://www.wired.co.uk/article/talktalk-hack-customers-lost[TalkTalk
+2015 data breach] is compelling evidence that TalkTalk isn't a safe
+host for privacy-related data. Cloudflare's record is not spotless,
+but on balance they are more trustworthy than TalkTalk.
+____
 == ... or the full half hour?
 
 == Organisation layer
 
 [%step]
 * Split-horizon DNS
+* Local content caches
+* Service support
 * Organisation does not regard its own network as belonging to attacker
 * "`My network, my rules`"
 [%step]
@@ -912,18 +913,21 @@ not spotless, but on balance they are more trustworthy than TalkTalk.
 [%step]
 * Filtering banned content using DNS
 * Malware detection and mitigation
-* There are valid reasons organisations need some visibility on their DNS lookups
+* There are valid reasons organisations need *some* visibility on their DNS lookups
 
 == Religious layer
 
 [%step]
 * Will DNS resolving go the way of email?
-* Are we heading for an internet where *everything* runs on HTTPS to port 443?
+* Internet future:
+[%step]
+** Are we moving inexorably towards an internet totally reliant on a few big corporations?
+** Are we heading for an internet where *everything* runs on HTTPS to port 443?
 
 == DNS privacy now
 
 * DoT via system
-* Opportunistic or Strict to organisation's resolver
+* Opportunistic or Strict to organisation's chosen resolver
 
 == Fin
 
