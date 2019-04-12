@@ -157,6 +157,11 @@ https://www.iana.org/domains/root/servers[IANA has the details]
 J root was originally Network Solutions, now taken over by VeriSign.
 --
 
+== Authoritative servers
+
+* Contain the data for a zone
+* Run by the zone owner
+
 == Recursive servers
 
 * Search the hierarchy to resolve queries
@@ -865,6 +870,8 @@ image::5minuteargument.jpg[width=512]
 
 [%step]
 * Split between system and browser resolving
+** Home router naming
+** VPN naming
 * Configure DNS  for each application?
 * Breaks parental control service
 * Informed consent
