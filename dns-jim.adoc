@@ -553,7 +553,6 @@ Abstract
 
 DNS over TCP, but using TLS and to port 853
 
-[%notitle]
 == DoT modes
 
 [%step]
@@ -659,7 +658,7 @@ image::homer-doh.jpg[background,size=cover]
 == DoH timeline
 
 * October 2017: DoH draft adopted by WG
-* July 2017: Submitted to IESG
+* July 2018: Submitted to IESG
 * August 2018: Approved
 * October 2018: RFC8484 published
 
